@@ -17,10 +17,10 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <base.api.url>https://reqres.in/api/users</base.api.url>
+        <base.api.url>https://api.clockify.me/api</base.api.url>
         <cucumber.stepsDefinitions>--glue ar/steps --glue com/crowdar/api/rest</cucumber.stepsDefinitions>
         <cucumber.hooks>--glue com/crowdar/bdd/cukes --glue ar/apiExampleProject/hook</cucumber.hooks>
-        <cucumber.tags>@Success</cucumber.tags>
+        <cucumber.tags>@testGabo</cucumber.tags>
         <crowdar.cucumber.plugins>--plugin pretty --plugin api.report.CucumberReporter:</crowdar.cucumber.plugins>
         <crowdar.extent.host.name>LocalMachine</crowdar.extent.host.name>
         <crowdar.extent.environment>Local</crowdar.extent.environment>
@@ -91,6 +91,13 @@
         <filters>
             <filter>src/main/resources/cucumber.properties</filter>
         </filters>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -101,14 +108,6 @@
                         <suiteXmlFile>${apiExample.runner}</suiteXmlFile>
                     </suiteXmlFiles>
                     <systemPropertyVariables>
-                        <TEST_MANAGER_USERNAME></TEST_MANAGER_USERNAME>
-                        <TEST_MANAGER_PASSWORD></TEST_MANAGER_PASSWORD>
-                        <TEST_MANAGER_API_HOST></TEST_MANAGER_API_HOST>
-                        <TEST_MANAGER_API_PORT></TEST_MANAGER_API_PORT>
-                        <TEST_MANAGER_RUN_NAME></TEST_MANAGER_RUN_NAME>
-                        <TEST_MANAGER_PROJECT_CODE></TEST_MANAGER_PROJECT_CODE>
-                        <TEST_MANAGER_REPOSITORY_URL></TEST_MANAGER_REPOSITORY_URL>
-                        <TEST_MANAGER_REPOSITORY_BRANCH></TEST_MANAGER_REPOSITORY_BRANCH>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
