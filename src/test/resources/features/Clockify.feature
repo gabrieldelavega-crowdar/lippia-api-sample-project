@@ -1,8 +1,8 @@
-@testGabo
 Feature: Clockify
 
 
-  @Workspace @Smoke
+  @Workspace @Smoke @testGabo
+
   Scenario Outline: Get all workspaces and save Workspace ID
     Given An account created in Clockify and x-api-key '<token>' generated
     When I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''
