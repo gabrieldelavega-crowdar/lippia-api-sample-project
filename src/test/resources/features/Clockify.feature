@@ -1,9 +1,7 @@
 Feature: Clockify
 
-
-  @Workspace @Smoke @testGabo
-
-  Scenario Outline: Get all workspaces and save Workspace ID
+  @Workspace @Smoke
+  Scenario Outline: Get all my Workspaces
     Given An account created in Clockify and x-api-key '<token>' generated
     When I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''
     Then status code <statusCode> is obtained
@@ -14,70 +12,116 @@ Feature: Clockify
       | GET       | WORKSPACE | getAllMyWorkspaces | 200        | ODhiYWFiMzItNWNkZC00NWYzLWIxMmItZDcyNTQzYWU4N2Mw |
 
 
-  @Project
-  Scenario Outline: Create a new project
+  @Project @GetAllProjects @testGabo
+  Scenario Outline: Get all projects on workspace
+    Given An account created in Clockify and x-api-key '<token>' generated
+    When I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllMyWorkspaces' and ''
+    And I extract the workspace ID
+    When I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''
+    Then status code <statusCode> is obtained
+
+    Examples:
+      | operation | entity   | jsonName     | statusCode | token                                            |
+      | GET       | PROJECTS | getAllProjects | 200        | ODhiYWFiMzItNWNkZC00NWYzLWIxMmItZDcyNTQzYWU4N2Mw |
+
+
+  @Project @AddProject
+  Scenario Outline: Add a new project
+    Given An account created in Clockify and x-api-key '<token>' generated
+    When I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllMyWorkspaces' and ''
+    And I extract the workspace ID
     When I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''
     Then status code <statusCode> is obtained
     And I extract the project ID
 
     Examples:
-      | operation | entity   | jsonName      | statusCode |
-      | POST      | PROJECTS | addNewProject | 201        |
+      | operation | entity   | jsonName      | statusCode | token                                            |
+      | POST      | PROJECTS | addNewProject | 201        | ODhiYWFiMzItNWNkZC00NWYzLWIxMmItZDcyNTQzYWU4N2Mw |
 
-  @Project
-  Scenario Outline: Find the created project by ID
+
+  @Project @FindProject
+  Scenario Outline: GET Find project by ID
+    Given An account created in Clockify and x-api-key '<token>' generated
+    When I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllMyWorkspaces' and ''
+    And I extract the workspace ID
+    When I perform a 'POST' to 'PROJECTS' endpoint with the 'addNewProject' and ''
+    And I extract the project ID
     When I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''
     Then status code <statusCode> is obtained
 
     Examples:
-      | operation | entity   | jsonName | statusCode |
-      | GET       | PROJECTS | (empty)  | 200        |
+      | operation | entity   | jsonName | statusCode | token                                            |
+      | GET       | PROJECTS | (empty)  | 200        | ODhiYWFiMzItNWNkZC00NWYzLWIxMmItZDcyNTQzYWU4N2Mw |
 
-  @Project
-  Scenario Outline: Update the created project
+
+  @Project @UpdateProject
+  Scenario Outline: PUT Project
+    Given An account created in Clockify and x-api-key '<token>' generated
+    When I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllMyWorkspaces' and ''
+    And I extract the workspace ID
+    When I perform a 'POST' to 'PROJECTS' endpoint with the 'addNewProject' and ''
+    And I extract the project ID
     When I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''
     Then status code <statusCode> is obtained
 
     Examples:
-      | operation | entity   | jsonName      | statusCode |
-      | PUT       | PROJECTS | updateProject | 200        |
+      | operation | entity   | jsonName      | statusCode | token                                            |
+      | PUT       | PROJECTS | updateProject | 200        | ODhiYWFiMzItNWNkZC00NWYzLWIxMmItZDcyNTQzYWU4N2Mw |
 
-  @Project @Sequential
-  Scenario Outline: Delete the created project
+
+  @Project @DeleteProject
+  Scenario Outline: Delete project from workspace
+    Given An account created in Clockify and x-api-key '<token>' generated
+    When I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllMyWorkspaces' and ''
+    And I extract the workspace ID
+    When I perform a 'POST' to 'PROJECTS' endpoint with the 'addNewProject' and ''
+    And I extract the project ID
     When I archive the project using 'PUT' operation to 'PROJECTS' with 'archiveProject'
     Then status code 200 is obtained
     When I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''
     Then status code <statusCode> is obtained
 
     Examples:
-      | operation | entity   | jsonName | statusCode |
-      | DELETE    | PROJECTS | (empty)  | 200        |
+      | operation | entity   | jsonName | statusCode | token                                            |
+      | DELETE    | PROJECTS | (empty)  | 200        | ODhiYWFiMzItNWNkZC00NWYzLWIxMmItZDcyNTQzYWU4N2Mw |
 
-
-  @Client
-  Scenario Outline:Create a new client
+  @Client @AddClient
+  Scenario Outline: Add a new client
+    Given An account created in Clockify and x-api-key '<token>' generated
+    When I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllMyWorkspaces' and ''
+    And I extract the workspace ID
     When I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''
     Then status code <statusCode> is obtained
     And I extract the client ID
 
     Examples:
-      | operation | entity  | jsonName     | statusCode |
-      | POST      | CLIENTS | addNewClient | 201        |
+      | operation | entity  | jsonName     | statusCode | token                                            |
+      | POST      | CLIENTS | addNewClient | 201        | ODhiYWFiMzItNWNkZC00NWYzLWIxMmItZDcyNTQzYWU4N2Mw |
 
-  @Client
-  Scenario Outline: Update the created client
+
+  @Client @FindClient
+  Scenario Outline: Find clients on workspace
+    Given An account created in Clockify and x-api-key '<token>' generated
+    When I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllMyWorkspaces' and ''
+    And I extract the workspace ID
     When I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''
     Then status code <statusCode> is obtained
 
     Examples:
-      | operation | entity  | jsonName     | statusCode |
-      | PUT       | CLIENTS | updateClient | 200        |
+      | operation | entity  | jsonName   | statusCode | token                                            |
+      | GET       | CLIENTS | allClients | 200        | ODhiYWFiMzItNWNkZC00NWYzLWIxMmItZDcyNTQzYWU4N2Mw |
 
-  @Client
-  Scenario Outline: Delete the created client
+
+  @Client @DeleteClient
+  Scenario Outline: DELETE Client
+    Given An account created in Clockify and x-api-key '<token>' generated
+    When I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllMyWorkspaces' and ''
+    And I extract the workspace ID
+    When I perform a 'POST' to 'CLIENTS' endpoint with the 'addNewClient' and ''
+    And I extract the client ID
     When I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''
     Then status code <statusCode> is obtained
 
     Examples:
-      | operation | entity  | jsonName | statusCode |
-      | DELETE    | CLIENTS | (empty)  | 200        |
+      | operation | entity  | jsonName | statusCode | token                                            |
+      | DELETE    | CLIENTS | (empty)  | 200        | ODhiYWFiMzItNWNkZC00NWYzLWIxMmItZDcyNTQzYWU4N2Mw |
