@@ -39,9 +39,6 @@ public class ClientService extends BaseService {
 
             if (id != null) {
                 System.setProperty("clientId", id);
-                System.out.println("DEBUG - Client ID guardado en Sistema: " + id);
-            } else {
-                System.out.println("DEBUG - No se pudo extraer ID (Objeto nulo o lista vacía)");
             }
 
         } catch (Exception e) {
