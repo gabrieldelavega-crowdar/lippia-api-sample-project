@@ -1,0 +1,15 @@
+{
+  "url": "{{base.url}}",
+  "endpoint": "/v1/workspaces/{{workspaceId}}/projects/{{projectId}}",
+  "headers": {
+    "x-api-key": "{{x-api-key}}",
+    "Content-Type": "application/json"
+  },
+  "body": {
+    "name": "EDITADO_{{projectName}}",
+    "note": "Nota actualizada por Lippia",
+    "color": "#0000FF",
+    "archived": false,
+    "isPublic": true
+  }
+}

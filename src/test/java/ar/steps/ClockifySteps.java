@@ -3,6 +3,7 @@ package ar.steps;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import services.BaseService;
+import services.ProjectService;
 import services.WorkspaceService;
 
 public class ClockifySteps {
@@ -13,7 +14,12 @@ public class ClockifySteps {
     }
 
     @And("I extract the workspace ID")
-    public void saveWorkspaceId() {
+    public void iExtractWorkspaceId() {
         WorkspaceService.defineWorkspacesId();
+    }
+
+    @And("I extract the project ID")
+    public void iExtractTheProjectId() {
+        ProjectService.defineProjectId();
     }
 }

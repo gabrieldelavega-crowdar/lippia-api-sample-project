@@ -12,7 +12,7 @@ Feature: Clockify
       | GET       | WORKSPACE | getAllMyWorkspaces | 200        | ODhiYWFiMzItNWNkZC00NWYzLWIxMmItZDcyNTQzYWU4N2Mw |
 
 
-  @Project @GetAllProjects @testGabo
+  @Project @GetAllProjects
   Scenario Outline: Get all projects on workspace
     Given An account created in Clockify and x-api-key '<token>' generated
     When I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllMyWorkspaces' and ''
@@ -21,7 +21,7 @@ Feature: Clockify
     Then status code <statusCode> is obtained
 
     Examples:
-      | operation | entity   | jsonName     | statusCode | token                                            |
+      | operation | entity   | jsonName       | statusCode | token                                            |
       | GET       | PROJECTS | getAllProjects | 200        | ODhiYWFiMzItNWNkZC00NWYzLWIxMmItZDcyNTQzYWU4N2Mw |
 
 
@@ -40,7 +40,7 @@ Feature: Clockify
 
 
   @Project @FindProject
-  Scenario Outline: GET Find project by ID
+  Scenario Outline: Find project by ID
     Given An account created in Clockify and x-api-key '<token>' generated
     When I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllMyWorkspaces' and ''
     And I extract the workspace ID
@@ -50,8 +50,8 @@ Feature: Clockify
     Then status code <statusCode> is obtained
 
     Examples:
-      | operation | entity   | jsonName | statusCode | token                                            |
-      | GET       | PROJECTS | (empty)  | 200        | ODhiYWFiMzItNWNkZC00NWYzLWIxMmItZDcyNTQzYWU4N2Mw |
+      | operation | entity   | jsonName       | statusCode | token                                            |
+      | GET       | PROJECTS | getProjectById | 200        | ODhiYWFiMzItNWNkZC00NWYzLWIxMmItZDcyNTQzYWU4N2Mw |
 
 
   @Project @UpdateProject
@@ -69,21 +69,22 @@ Feature: Clockify
       | PUT       | PROJECTS | updateProject | 200        | ODhiYWFiMzItNWNkZC00NWYzLWIxMmItZDcyNTQzYWU4N2Mw |
 
 
-  @Project @DeleteProject
+  @Project @DeleteProject @testGabo
   Scenario Outline: Delete project from workspace
     Given An account created in Clockify and x-api-key '<token>' generated
     When I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllMyWorkspaces' and ''
     And I extract the workspace ID
     When I perform a 'POST' to 'PROJECTS' endpoint with the 'addNewProject' and ''
     And I extract the project ID
-    When I archive the project using 'PUT' operation to 'PROJECTS' with 'archiveProject'
+    Then status code 201 is obtained
+    When I perform a 'PUT' to 'PROJECTS' endpoint with the 'archiveProject' and ''
     Then status code 200 is obtained
     When I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''
     Then status code <statusCode> is obtained
 
     Examples:
-      | operation | entity   | jsonName | statusCode | token                                            |
-      | DELETE    | PROJECTS | (empty)  | 200        | ODhiYWFiMzItNWNkZC00NWYzLWIxMmItZDcyNTQzYWU4N2Mw |
+      | operation | entity   | jsonName      | statusCode | token                                            |
+      | DELETE    | PROJECTS | deleteProject | 200        | ODhiYWFiMzItNWNkZC00NWYzLWIxMmItZDcyNTQzYWU4N2Mw |
 
   @Client @AddClient
   Scenario Outline: Add a new client
