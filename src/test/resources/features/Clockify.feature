@@ -17,7 +17,7 @@ Feature: Clockify
     Given An account created in Clockify and x-api-key '<token>' generated
     When I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllMyWorkspaces' and ''
     And I extract the workspace ID
-    When I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''
+    And I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''
     Then status code <statusCode> is obtained
 
     Examples:
@@ -30,7 +30,7 @@ Feature: Clockify
     Given An account created in Clockify and x-api-key '<token>' generated
     When I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllMyWorkspaces' and ''
     And I extract the workspace ID
-    When I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''
+    And I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''
     Then status code <statusCode> is obtained
     And I extract the project ID
 
@@ -44,7 +44,7 @@ Feature: Clockify
     Given An account created in Clockify and x-api-key '<token>' generated
     When I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllMyWorkspaces' and ''
     And I extract the workspace ID
-    When I perform a 'POST' to 'PROJECTS' endpoint with the 'addNewProject' and ''
+    And I perform a 'POST' to 'PROJECTS' endpoint with the 'addNewProject' and ''
     And I extract the project ID
     When I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''
     Then status code <statusCode> is obtained
@@ -59,9 +59,9 @@ Feature: Clockify
     Given An account created in Clockify and x-api-key '<token>' generated
     When I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllMyWorkspaces' and ''
     And I extract the workspace ID
-    When I perform a 'POST' to 'PROJECTS' endpoint with the 'addNewProject' and ''
+    And I perform a 'POST' to 'PROJECTS' endpoint with the 'addNewProject' and ''
     And I extract the project ID
-    When I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''
+    And I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''
     Then status code <statusCode> is obtained
 
     Examples:
@@ -74,12 +74,12 @@ Feature: Clockify
     Given An account created in Clockify and x-api-key '<token>' generated
     When I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllMyWorkspaces' and ''
     And I extract the workspace ID
-    When I perform a 'POST' to 'PROJECTS' endpoint with the 'addNewProject' and ''
+    And I perform a 'POST' to 'PROJECTS' endpoint with the 'addNewProject' and ''
     And I extract the project ID
-    Then status code 201 is obtained
-    When I perform a 'PUT' to 'PROJECTS' endpoint with the 'archiveProject' and ''
-    Then status code 200 is obtained
-    When I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''
+    And status code 201 is obtained
+    And I perform a 'PUT' to 'PROJECTS' endpoint with the 'archiveProject' and ''
+    And status code 200 is obtained
+    And I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''
     Then status code <statusCode> is obtained
 
     Examples:
@@ -91,7 +91,7 @@ Feature: Clockify
     Given An account created in Clockify and x-api-key '<token>' generated
     When I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllMyWorkspaces' and ''
     And I extract the workspace ID
-    When I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''
+    And I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''
     And I extract the client ID
     Then status code <statusCode> is obtained
 
@@ -105,7 +105,7 @@ Feature: Clockify
     Given An account created in Clockify and x-api-key '<token>' generated
     When I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllMyWorkspaces' and ''
     And I extract the workspace ID
-    When I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''
+    And I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''
     Then status code <statusCode> is obtained
 
     Examples:
@@ -118,9 +118,9 @@ Feature: Clockify
     Given An account created in Clockify and x-api-key '<token>' generated
     When I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllMyWorkspaces' and ''
     And I extract the workspace ID
-    When I perform a 'POST' to 'CLIENTS' endpoint with the 'addNewClient' and ''
+    And I perform a 'POST' to 'CLIENTS' endpoint with the 'addNewClient' and ''
     And I extract the client ID
-    Then status code 201 is obtained
+    And status code 201 is obtained
     When I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''
     Then status code <statusCode> is obtained
 
