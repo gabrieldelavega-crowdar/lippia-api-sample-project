@@ -69,7 +69,7 @@ Feature: Clockify
       | PUT       | PROJECTS | updateProject | 200        | ODhiYWFiMzItNWNkZC00NWYzLWIxMmItZDcyNTQzYWU4N2Mw |
 
 
-  @Project @DeleteProject @testGabo
+  @Project @DeleteProject
   Scenario Outline: Delete project from workspace
     Given An account created in Clockify and x-api-key '<token>' generated
     When I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllMyWorkspaces' and ''
@@ -92,8 +92,8 @@ Feature: Clockify
     When I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllMyWorkspaces' and ''
     And I extract the workspace ID
     When I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''
-    Then status code <statusCode> is obtained
     And I extract the client ID
+    Then status code <statusCode> is obtained
 
     Examples:
       | operation | entity  | jsonName     | statusCode | token                                            |
@@ -110,19 +110,20 @@ Feature: Clockify
 
     Examples:
       | operation | entity  | jsonName   | statusCode | token                                            |
-      | GET       | CLIENTS | allClients | 200        | ODhiYWFiMzItNWNkZC00NWYzLWIxMmItZDcyNTQzYWU4N2Mw |
+      | GET       | CLIENTS | getClients | 200        | ODhiYWFiMzItNWNkZC00NWYzLWIxMmItZDcyNTQzYWU4N2Mw |
 
 
-  @Client @DeleteClient
+  @Client @DeleteClient @testGabo
   Scenario Outline: DELETE Client
     Given An account created in Clockify and x-api-key '<token>' generated
     When I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllMyWorkspaces' and ''
     And I extract the workspace ID
     When I perform a 'POST' to 'CLIENTS' endpoint with the 'addNewClient' and ''
     And I extract the client ID
+    Then status code 201 is obtained
     When I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''
     Then status code <statusCode> is obtained
 
     Examples:
-      | operation | entity  | jsonName | statusCode | token                                            |
-      | DELETE    | CLIENTS | (empty)  | 200        | ODhiYWFiMzItNWNkZC00NWYzLWIxMmItZDcyNTQzYWU4N2Mw |
+      | operation | entity  | jsonName     | statusCode | token                                            |
+      | DELETE    | CLIENTS | deleteClient | 200        | ODhiYWFiMzItNWNkZC00NWYzLWIxMmItZDcyNTQzYWU4N2Mw |
