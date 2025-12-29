@@ -1,5 +1,5 @@
 Feature: Clockify
-
+#TP FINAL DESDE LA LÍNEA 132
   @Workspace @Smoke
   Scenario Outline: Get all my Workspaces
     Given An account created in Clockify and x-api-key '<token>' generated
@@ -113,7 +113,7 @@ Feature: Clockify
       | GET       | CLIENTS | getClients | 200        | ODhiYWFiMzItNWNkZC00NWYzLWIxMmItZDcyNTQzYWU4N2Mw |
 
 
-  @Client @DeleteClient @testGabo
+  @Client @DeleteClient
   Scenario Outline: DELETE Client
     Given An account created in Clockify and x-api-key '<token>' generated
     When I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllMyWorkspaces' and ''
@@ -127,3 +127,36 @@ Feature: Clockify
     Examples:
       | operation | entity  | jsonName     | statusCode | token                                            |
       | DELETE    | CLIENTS | deleteClient | 200        | ODhiYWFiMzItNWNkZC00NWYzLWIxMmItZDcyNTQzYWU4N2Mw |
+
+
+    #ACÁ EMPIEZA EL TP FINAL
+    # -------------------------------------------------------------------------
+
+  @TimeEntry @GetTimeEntries
+  Scenario Outline: Get all time entries for user
+    Given An account created in Clockify and x-api-key '<token>' generated
+    When I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllMyWorkspaces' and ''
+    And I extract the workspace ID
+    When I perform a 'GET' to 'USER' endpoint with the 'getUser' and ''
+    And I extract the user ID
+    When I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''
+    Then status code <statusCode> is obtained
+
+    Examples:
+      | operation | entity       | jsonName       | statusCode | token                                            |
+      | GET       | TIME_ENTRIES | getTimeEntries | 200        | ODhiYWFiMzItNWNkZC00NWYzLWIxMmItZDcyNTQzYWU4N2Mw |
+
+  @TimeEntry @AddTimeEntry @testGabo
+  Scenario Outline: Add time entry to a project
+    Given An account created in Clockify and x-api-key '<token>' generated
+    When I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllMyWorkspaces' and ''
+    And I extract the workspace ID
+    When I perform a 'POST' to 'PROJECTS' endpoint with the 'addNewProject' and ''
+    And I extract the project ID
+    Then status code 201 is obtained
+    When I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''
+    Then status code <statusCode> is obtained
+
+    Examples:
+      | operation | entity       | jsonName     | statusCode | token                                            |
+      | POST      | TIME_ENTRIES | addTimeEntry | 201        | ODhiYWFiMzItNWNkZC00NWYzLWIxMmItZDcyNTQzYWU4N2Mw |

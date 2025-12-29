@@ -1,0 +1,9 @@
+{
+  "url": "{{base.url}}",
+  "endpoint": "/v1/user",
+  "headers": {
+    "x-api-key": "{{x-api-key}}",
+    "Content-Type": "application/json"
+  },
+  "body": {}
+}

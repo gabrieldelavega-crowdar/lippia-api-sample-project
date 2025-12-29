@@ -1,36 +1,50 @@
 package services;
 
-import api.model.Data;
-import com.crowdar.api.rest.MethodsService;
+import api.model.user.UserModel;
+import com.crowdar.api.rest.APIManager;
 import com.crowdar.api.rest.Response;
-import com.crowdar.util.MapUtils;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.crowdar.core.PropertyManager;
 
+import java.util.HashMap;
 import java.util.Map;
 
-
-public class UserService extends MethodsService {
+public class UserService extends BaseService {
 
     public static Response get(String jsonName) {
-       return get(jsonName, Data.class);
+        return get(jsonName, UserModel.class, setParams());
     }
 
-    public static Response delete(String jsonName) {
-        return delete(jsonName, null);
+    public static void defineUserId() {
+        Object response = APIManager.getLastResponse().getResponse();
+        String id = null;
+
+        try {
+            if (response instanceof UserModel) {
+                UserModel user = (UserModel) response;
+                id = user.getId();
+            }
+
+            if (id != null) {
+                System.setProperty("userId", id);
+                System.out.println("DEBUG - User ID guardado: " + id);
+            } else {
+                System.out.println("DEBUG - No se pudo extraer User ID");
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error extrayendo User ID: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
-    @Override
-    public void validateFields(Object expected, Object actual, Map<String, String> parameters) throws Exception {
-        Map<String, Object> expectedObjectMapped = MapUtils.convertObjectToMap(expected);
-        Map<String, String> expectedData = (Map<String, String>) expectedObjectMapped.get("data");
-        expectedData.replace("first_name", parameters.get("name"));
+    private static Map<String, String> setParams() {
+        Map<String, String> params = new HashMap<>();
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        expected = objectMapper.convertValue(expectedObjectMapped, Object.class);
+        params.put("base.url", PropertyManager.getProperty("base.api.url"));
+        if (X_API_KEY.get() != null) {
+            params.put("x-api-key", X_API_KEY.get());
+        }
 
-        validateFields(expected, actual);
+        return params;
     }
-
 }
-
-

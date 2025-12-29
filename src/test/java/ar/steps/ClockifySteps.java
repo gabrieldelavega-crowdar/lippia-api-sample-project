@@ -2,10 +2,7 @@ package ar.steps;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
-import services.BaseService;
-import services.ClientService;
-import services.ProjectService;
-import services.WorkspaceService;
+import services.*;
 
 public class ClockifySteps {
 
@@ -27,5 +24,10 @@ public class ClockifySteps {
     @And("I extract the client ID")
     public void iExtractTheClientId() {
         ClientService.defineClientId();
+    }
+
+    @And("I extract the user ID")
+    public void iExtractTheUserId() {
+        UserService.defineUserId();
     }
 }

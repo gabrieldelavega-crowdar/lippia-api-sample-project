@@ -1,0 +1,14 @@
+{
+  "url": "{{base.url}}",
+  "endpoint": "/v1/workspaces/{{workspaceId}}/time-entries",
+  "headers": {
+    "x-api-key": "{{x-api-key}}",
+    "Content-Type": "application/json"
+  },
+  "body": {
+    "description": "Automatización Lippia - {{dateDescription}}",
+    "projectId": "{{projectId}}",
+    "start": "{{start}}",
+    "end": "{{end}}"
+  }
+}
