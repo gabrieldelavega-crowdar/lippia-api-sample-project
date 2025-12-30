@@ -8,8 +8,13 @@ import services.*;
 public class ClockifySteps {
 
     @Given("An account created in Clockify and x-api-key '(.*)' generated")
-    public void defineApiKey(String apiKey) {
-        BaseService.X_API_KEY.set(apiKey);
+    public void defineApiKey(String keyVariable) {
+        String token = PropertyManager.getProperty(keyVariable);
+
+        if (token == null) {
+            token = keyVariable;
+        }
+        BaseService.X_API_KEY.set(token);
     }
 
     @And("I extract the workspace ID")

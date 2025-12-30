@@ -8,8 +8,8 @@ Feature: Clockify
     And I extract the workspace ID
 
     Examples:
-      | operation | entity    | jsonName           | statusCode | token                                            |
-      | GET       | WORKSPACE | getAllMyWorkspaces | 200        | ODhiYWFiMzItNWNkZC00NWYzLWIxMmItZDcyNTQzYWU4N2Mw |
+      | operation | entity    | jsonName           | statusCode | token              |
+      | GET       | WORKSPACE | getAllMyWorkspaces | 200        | clockify.api.token |
 
 
   @Project @GetAllProjects
@@ -21,8 +21,8 @@ Feature: Clockify
     Then status code <statusCode> is obtained
 
     Examples:
-      | operation | entity   | jsonName       | statusCode | token                                            |
-      | GET       | PROJECTS | getAllProjects | 200        | ODhiYWFiMzItNWNkZC00NWYzLWIxMmItZDcyNTQzYWU4N2Mw |
+      | operation | entity   | jsonName       | statusCode | token              |
+      | GET       | PROJECTS | getAllProjects | 200        | clockify.api.token |
 
 
   @Project @AddProject
@@ -35,8 +35,8 @@ Feature: Clockify
     And I extract the project ID
 
     Examples:
-      | operation | entity   | jsonName      | statusCode | token                                            |
-      | POST      | PROJECTS | addNewProject | 201        | ODhiYWFiMzItNWNkZC00NWYzLWIxMmItZDcyNTQzYWU4N2Mw |
+      | operation | entity   | jsonName      | statusCode | token              |
+      | POST      | PROJECTS | addNewProject | 201        | clockify.api.token |
 
 
   @Project @FindProject
@@ -50,8 +50,8 @@ Feature: Clockify
     Then status code <statusCode> is obtained
 
     Examples:
-      | operation | entity   | jsonName       | statusCode | token                                            |
-      | GET       | PROJECTS | getProjectById | 200        | ODhiYWFiMzItNWNkZC00NWYzLWIxMmItZDcyNTQzYWU4N2Mw |
+      | operation | entity   | jsonName       | statusCode | token              |
+      | GET       | PROJECTS | getProjectById | 200        | clockify.api.token |
 
 
   @Project @UpdateProject
@@ -65,8 +65,8 @@ Feature: Clockify
     Then status code <statusCode> is obtained
 
     Examples:
-      | operation | entity   | jsonName      | statusCode | token                                            |
-      | PUT       | PROJECTS | updateProject | 200        | ODhiYWFiMzItNWNkZC00NWYzLWIxMmItZDcyNTQzYWU4N2Mw |
+      | operation | entity   | jsonName      | statusCode | token              |
+      | PUT       | PROJECTS | updateProject | 200        | clockify.api.token |
 
 
   @Project @DeleteProject
@@ -83,8 +83,8 @@ Feature: Clockify
     Then status code <statusCode> is obtained
 
     Examples:
-      | operation | entity   | jsonName      | statusCode | token                                            |
-      | DELETE    | PROJECTS | deleteProject | 200        | ODhiYWFiMzItNWNkZC00NWYzLWIxMmItZDcyNTQzYWU4N2Mw |
+      | operation | entity   | jsonName      | statusCode | token              |
+      | DELETE    | PROJECTS | deleteProject | 200        | clockify.api.token |
 
   @Client @AddClient
   Scenario Outline: Add a new client
@@ -96,8 +96,8 @@ Feature: Clockify
     Then status code <statusCode> is obtained
 
     Examples:
-      | operation | entity  | jsonName     | statusCode | token                                            |
-      | POST      | CLIENTS | addNewClient | 201        | ODhiYWFiMzItNWNkZC00NWYzLWIxMmItZDcyNTQzYWU4N2Mw |
+      | operation | entity  | jsonName     | statusCode | token              |
+      | POST      | CLIENTS | addNewClient | 201        | clockify.api.token |
 
 
   @Client @FindClient
@@ -109,8 +109,8 @@ Feature: Clockify
     Then status code <statusCode> is obtained
 
     Examples:
-      | operation | entity  | jsonName   | statusCode | token                                            |
-      | GET       | CLIENTS | getClients | 200        | ODhiYWFiMzItNWNkZC00NWYzLWIxMmItZDcyNTQzYWU4N2Mw |
+      | operation | entity  | jsonName   | statusCode | token              |
+      | GET       | CLIENTS | getClients | 200        | clockify.api.token |
 
 
   @Client @DeleteClient
@@ -125,8 +125,8 @@ Feature: Clockify
     Then status code <statusCode> is obtained
 
     Examples:
-      | operation | entity  | jsonName     | statusCode | token                                            |
-      | DELETE    | CLIENTS | deleteClient | 200        | ODhiYWFiMzItNWNkZC00NWYzLWIxMmItZDcyNTQzYWU4N2Mw |
+      | operation | entity  | jsonName     | statusCode | token              |
+      | DELETE    | CLIENTS | deleteClient | 200        | clockify.api.token |
 
 
     #ACÁ EMPIEZA EL TP FINAL
@@ -143,8 +143,8 @@ Feature: Clockify
     Then status code <statusCode> is obtained
 
     Examples:
-      | operation | entity       | jsonName       | statusCode | token                                            |
-      | GET       | TIME_ENTRIES | getTimeEntries | 200        | ODhiYWFiMzItNWNkZC00NWYzLWIxMmItZDcyNTQzYWU4N2Mw |
+      | operation | entity       | jsonName       | statusCode | token              |
+      | GET       | TIME_ENTRIES | getTimeEntries | 200        | clockify.api.token |
 
   @TimeEntry @AddTimeEntry
   Scenario Outline: Add time entry to a project
@@ -158,8 +158,8 @@ Feature: Clockify
     Then status code <statusCode> is obtained
 
     Examples:
-      | operation | entity       | jsonName     | statusCode | token                                            |
-      | POST      | TIME_ENTRIES | addTimeEntry | 201        | ODhiYWFiMzItNWNkZC00NWYzLWIxMmItZDcyNTQzYWU4N2Mw |
+      | operation | entity       | jsonName     | statusCode | token              |
+      | POST      | TIME_ENTRIES | addTimeEntry | 201        | clockify.api.token |
 
   @TimeEntry @UpdateTimeEntry @testGabo
   Scenario Outline: Edit an existing time entry
@@ -175,8 +175,8 @@ Feature: Clockify
     Then status code <statusCode> is obtained
 
     Examples:
-      | operation | entity       | jsonName        | statusCode | token                                            |
-      | PUT       | TIME_ENTRIES | updateTimeEntry | 200        | ODhiYWFiMzItNWNkZC00NWYzLWIxMmItZDcyNTQzYWU4N2Mw |
+      | operation | entity       | jsonName        | statusCode | token              |
+      | PUT       | TIME_ENTRIES | updateTimeEntry | 200        | clockify.api.token |
 
 
   @TimeEntry @DeleteTimeEntry
@@ -193,5 +193,5 @@ Feature: Clockify
     Then status code <statusCode> is obtained
 
     Examples:
-      | operation | entity       | jsonName        | statusCode | token                                            |
-      | DELETE    | TIME_ENTRIES | deleteTimeEntry | 204        | ODhiYWFiMzItNWNkZC00NWYzLWIxMmItZDcyNTQzYWU4N2Mw |
+      | operation | entity       | jsonName        | statusCode | token              |
+      | DELETE    | TIME_ENTRIES | deleteTimeEntry | 204        | clockify.api.token |
