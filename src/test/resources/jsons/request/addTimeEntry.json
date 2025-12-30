@@ -6,9 +6,9 @@
     "Content-Type": "application/json"
   },
   "body": {
-    "description": "Automatización Lippia - {{dateDescription}}",
+    "description": "Creación (1h) {{dateDescription}}",
     "projectId": "{{projectId}}",
     "start": "{{start}}",
-    "end": "{{end}}"
+    "end": "{{end_1h}}"
   }
 }

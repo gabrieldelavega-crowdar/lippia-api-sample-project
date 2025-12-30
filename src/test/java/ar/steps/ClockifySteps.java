@@ -1,5 +1,6 @@
 package ar.steps;
 
+import com.crowdar.core.PropertyManager;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import services.*;
@@ -29,5 +30,9 @@ public class ClockifySteps {
     @And("I extract the user ID")
     public void iExtractTheUserId() {
         UserService.defineUserId();
+    }
+    @And("I extract the time entry ID")
+    public void iExtractTheTimeEntryId() {
+        TimeEntryService.defineTimeEntryId();
     }
 }

@@ -135,9 +135,9 @@ Feature: Clockify
   @TimeEntry @GetTimeEntries
   Scenario Outline: Get all time entries for user
     Given An account created in Clockify and x-api-key '<token>' generated
-    When I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllMyWorkspaces' and ''
+    And I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllMyWorkspaces' and ''
     And I extract the workspace ID
-    When I perform a 'GET' to 'USER' endpoint with the 'getUser' and ''
+    And I perform a 'GET' to 'USER' endpoint with the 'getUser' and ''
     And I extract the user ID
     When I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''
     Then status code <statusCode> is obtained
@@ -146,17 +146,52 @@ Feature: Clockify
       | operation | entity       | jsonName       | statusCode | token                                            |
       | GET       | TIME_ENTRIES | getTimeEntries | 200        | ODhiYWFiMzItNWNkZC00NWYzLWIxMmItZDcyNTQzYWU4N2Mw |
 
-  @TimeEntry @AddTimeEntry @testGabo
+  @TimeEntry @AddTimeEntry
   Scenario Outline: Add time entry to a project
     Given An account created in Clockify and x-api-key '<token>' generated
-    When I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllMyWorkspaces' and ''
+    And I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllMyWorkspaces' and ''
     And I extract the workspace ID
-    When I perform a 'POST' to 'PROJECTS' endpoint with the 'addNewProject' and ''
+    And I perform a 'POST' to 'PROJECTS' endpoint with the 'addNewProject' and ''
     And I extract the project ID
-    Then status code 201 is obtained
+    And status code 201 is obtained
     When I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''
     Then status code <statusCode> is obtained
 
     Examples:
       | operation | entity       | jsonName     | statusCode | token                                            |
       | POST      | TIME_ENTRIES | addTimeEntry | 201        | ODhiYWFiMzItNWNkZC00NWYzLWIxMmItZDcyNTQzYWU4N2Mw |
+
+  @TimeEntry @UpdateTimeEntry @testGabo
+  Scenario Outline: Edit an existing time entry
+    Given An account created in Clockify and x-api-key '<token>' generated
+    And I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllMyWorkspaces' and ''
+    And I extract the workspace ID
+    And I perform a 'GET' to 'USER' endpoint with the 'getUser' and ''
+    And I extract the user ID
+    And I perform a 'GET' to 'TIME_ENTRIES' endpoint with the 'getTimeEntries' and ''
+    And status code 200 is obtained
+    And I extract the time entry ID
+    When I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''
+    Then status code <statusCode> is obtained
+
+    Examples:
+      | operation | entity       | jsonName        | statusCode | token                                            |
+      | PUT       | TIME_ENTRIES | updateTimeEntry | 200        | ODhiYWFiMzItNWNkZC00NWYzLWIxMmItZDcyNTQzYWU4N2Mw |
+
+
+  @TimeEntry @DeleteTimeEntry
+  Scenario Outline: Delete an existing time entry
+    Given An account created in Clockify and x-api-key '<token>' generated
+    And I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllMyWorkspaces' and ''
+    And I extract the workspace ID
+    And I perform a 'GET' to 'USER' endpoint with the 'getUser' and ''
+    And I extract the user ID
+    And I perform a 'GET' to 'TIME_ENTRIES' endpoint with the 'getTimeEntries' and ''
+    And status code 200 is obtained
+    And I extract the time entry ID
+    And I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''
+    Then status code <statusCode> is obtained
+
+    Examples:
+      | operation | entity       | jsonName        | statusCode | token                                            |
+      | DELETE    | TIME_ENTRIES | deleteTimeEntry | 204        | ODhiYWFiMzItNWNkZC00NWYzLWIxMmItZDcyNTQzYWU4N2Mw |

@@ -18,7 +18,6 @@ public enum EntityConfiguration {
         }
     },
 
-
     PROJECTS {
         @Override
         public Class<?> getEntityService() {
@@ -26,20 +25,25 @@ public enum EntityConfiguration {
         }
     },
 
-
     CLIENTS {
         @Override
         public Class<?> getEntityService() {
             return ClientService.class;
         }
     },
+
     TIME_ENTRIES {
         @Override
         public Class<?> getEntityService() {
             return TimeEntryService.class;
         }
+    },
+
+    TIME_ENTRIES_USER {
+        @Override
+        public Class<?> getEntityService() {
+            return TimeEntryService.class;
+        }
     };
-
-
     public abstract Class<?> getEntityService();
 }

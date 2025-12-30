@@ -1,25 +1,14 @@
 package api.model.timeEntry;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class TimeEntryModel {
 
-    @JsonProperty("id")
     private String id;
-
-    @JsonProperty("description")
     private String description;
 
-    @JsonProperty("userId")
-    private String userId;
-
-    @JsonProperty("projectId")
-    private String projectId;
-
-    @JsonProperty("timeInterval")
-    private Object timeInterval;
-
-    public TimeEntryModel() {}
+    private TimeInterval timeInterval;
 
     public String getId() {
         return id;
@@ -37,11 +26,42 @@ public class TimeEntryModel {
         this.description = description;
     }
 
-    public String getProjectId() {
-        return projectId;
+    public TimeInterval getTimeInterval() {
+        return timeInterval;
     }
 
-    public void setProjectId(String projectId) {
-        this.projectId = projectId;
+    public void setTimeInterval(TimeInterval timeInterval) {
+        this.timeInterval = timeInterval;
+    }
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class TimeInterval {
+        private String start;
+        private String end;
+        private String duration;
+
+        public String getStart() {
+            return start;
+        }
+
+        public void setStart(String start) {
+            this.start = start;
+        }
+
+        public String getEnd() {
+            return end;
+        }
+
+        public void setEnd(String end) {
+            this.end = end;
+        }
+
+        public String getDuration() {
+            return duration;
+        }
+
+        public void setDuration(String duration) {
+            this.duration = duration;
+        }
     }
 }

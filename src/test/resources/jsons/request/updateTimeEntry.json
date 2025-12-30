@@ -1,0 +1,13 @@
+{
+  "url": "{{base.url}}",
+  "endpoint": "/v1/workspaces/{{workspaceId}}/time-entries/{{timeEntryId}}",
+  "headers": {
+    "x-api-key": "{{x-api-key}}",
+    "Content-Type": "application/json"
+  },
+  "body": {
+    "start": "{{start}}",
+    "end": "{{end_4h}}",
+    "description": "Academy Update - Editado a 4 horas {{dateDescription}}"
+  }
+}
